@@ -8,6 +8,8 @@ const fetchPeople = async () => {
 }
 
 const People = () => {
+    //query variables can be passed to useQuery hook which can then be accepted into our function to fetch the data so
+    //pass a var to an endpoint for example
     const { data, status} = useQuery('planets', fetchPeople);
     console.log(data);
 
@@ -20,7 +22,6 @@ const People = () => {
             { status === 'loading' && (
                 <div>Loading fetching data</div>
             )}
-
 
                 {status === 'error' && (
                     <div>Error fetching data</div>

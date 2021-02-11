@@ -8,7 +8,11 @@ const fetchPlanets = async () => {
 }
 
 const Planets = () => {
-    const { data, status} = useQuery('planets', fetchPlanets);
+    const { data, status} = useQuery('planets', fetchPlanets,{
+        staleTime: 2000, // for how long will be the data fresh before next refetch when we switch window for example
+        cacheTime: 10,
+        onSuccess: () => console.log('no problem'),
+    });
     console.log(data);
 
     return (
