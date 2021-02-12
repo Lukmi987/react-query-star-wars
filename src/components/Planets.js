@@ -4,19 +4,16 @@ import { useQuery } from 'react-query';
 
 
 //first arg has to be key which is in query key arr[0] in useQuery, then we accept any
-const fetchPlanets = async (page) => {
-    console.log('my gretting',page);
+const fetchPlanets = async (key) => {
+    console.log(key.queryKey[2]);
+    const page = key.queryKey[2]
     const res = await fetch(`https://swapi.dev/api/planets/?page=${page}`);
     return res.json();
 }
 
 const Planets = () => {
     const [page, setPage] = useState(1)
-    const {data, status} = useQuery(['planets' ], () => fetchPlanets(page),{
-        staleTime: 2000,
-        cacheTime: 10,
-        onSuccess: () => console.log('no problem'),
-    });
+    const {data, status} = useQuery(['planets','hello humans',page ], fetchPlanets);
 
 
     return (
